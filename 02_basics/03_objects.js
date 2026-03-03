@@ -82,3 +82,20 @@ console.log(Object.entries(tinderUser)); // key value pair , array insidde array
 
 console.log(tinderUser.hasOwnProperty('isLoggedIn')); // to check if the object hhas teh specific property
 
+// objects de structure //
+
+const course = {
+    coursename:"JS tutorial",
+    price: "1000",
+    courseinstructor: "hitesh",
+}
+//course.courseinstructor // a complex way of printing 
+const {coursename} = course // destructuring
+console.log(coursename);
+//or// 
+const {courseinstructor: instructor}= course
+console.log(instructor);
+
+//JSON Api //
+// randomuserme API
+// json formater //gothrough
