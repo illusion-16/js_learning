@@ -57,3 +57,115 @@ form.addEventListener('submit',function(e){
   
 })
 ```
+
+## Project 3
+
+```javascript
+const clock = document.getElementById('clock');
+// const clock = document.querySelector('#clock')
+
+setInterval(function() {
+  let date = new Date();
+  clock.innerHTML = date.toLocaleTimeString();
+},1000);
+
+```
+# Project 4
+```javascript
+let randomNumber = parseInt(Math.random()*100+1);
+const submit = document.querySelector('#subt');
+const userInput = document.querySelector('#guessField');
+const guessSlot = document.querySelector('.guesses');
+const remaining = document.querySelector('.lastResult');
+const lowOrHigh = document.querySelector('.lowOrHi');
+const startOver = document.querySelector('.resultParas');
+
+const p = document.createElement('p');
+
+let playgame = true;
+let prevGuesses = [];
+let numGuesses = 1;
+
+if (playgame){
+  submit.addEventListener('click',function(e){
+    e.preventDefault();
+    const guesses= parseInt(userInput.value);
+    console.log(guesses);
+    validateGuesses(guesses);
+  });
+}
+
+function validateGuesses (guesses){
+  // to ccheck where the user has give a valid no between 1-100 
+  if(isNaN(guesses)){
+  alert('Please Enter A valid number');
+  }else if (guesses < 1){
+    alert('Please Enter A number greater than 0 ');
+  } else if (guesses > 100){
+    alert('Please Enter A number less than or equal to 100');
+} else {
+  prevGuesses.push(guesses)
+  if(numGuesses === 10){
+    displayGuesses(guesses);
+    displayMessage(`Game Over. The Random Number was ${randomNumber}`);
+    endgame();
+  } else {
+    displayGuesses(guesses);
+    checkGuesses(guesses);
+  }
+}
+}
+
+function checkGuesses (guesses){
+  //to prinnt the valid nno. 
+  if (guesses === randomNumber){
+    displayMessage(`WOHOO!! You guessed it right`);
+    endgame();
+  } else if(guesses < randomNumber){
+    displayMessage(`Number is TOOO Low`);
+  }else if(guesses > randomNumber){
+    displayMessage(`Number is TOOO High`);
+  }
+}
+
+function displayGuesses (guesses){
+  // clean up method 
+   userInput.value = '';
+   guessSlot.innerHTML += `${guesses}  `;
+   numGuesses++;
+   remaining.innerHTML = `${11 - numGuesses} `;
+} 
+
+function displayMessage (message){
+  //connects to dom to display the no. or msg and also clear them 
+  lowOrHigh.innerHTML = `<h2>${message}</h2>`;
+}
+
+function endgame(){
+  userInput.value = '';
+  userInput.setAttribute('disabled','');
+  p.classList.add('button')
+  p.innerHTML = '<h2 id = "newgame"> Start new game  </h2>';
+  startOver.appendChild(p)
+  playgame=false
+  newgame()
+}
+
+function newgame (){
+  const newGameButton = document.querySelector('#newgame');
+  newGameButton.addEventListener('click',function(e){
+    randomNumber = parseInt(Math.random()*100+1);
+    prevGuesses = [];
+    numGuesses = 1;
+    guessSlot.innerHTML= '';
+    remaining.innerHTML = `${11 - numGuesses} `;
+     userInput.removeAttribute('disabled', '');
+     startOver.removeChild(p);
+     playgame = true;
+  });
+
+}
+
+
+```
+
