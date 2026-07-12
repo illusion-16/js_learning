@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>javascript!<h1>
+    <button id="start">Start</button>
+     <button id="stop">Stop</button>
+</body>
+<script>
+       const sayDate= function(str){
+        console.log(str, Date.now());
+    }
+    let intervalid; // to make interval id global for both start and stop button 
+    document.querySelector('#start').addEventListener('click', function(){
+      intervalid = setInterval(sayDate, 1000, "hello!");
+         console.log("STARTED");
+    });
+    
+    document.querySelector('#stop').addEventListener('click', function(){
+        clearInterval(intervalid);
+        intervalid = null; // start can work again 
+        console.log("STOPPED");
+    });
+
+
+</script>
+</html>

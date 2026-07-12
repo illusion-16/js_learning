@@ -4,7 +4,7 @@
 [click here](https://stackblitz.com/edit/dom-project-chaiaurcode-nqxpsxku?file=1-colorChanger%2Fchaiaurcode.js,1-colorChanger%2Findex.html)
 
 # Solution Code 
-## project 1
+## PROJECT 1
 
 ```javascript
 const buttons = document.querySelectorAll('.button');
@@ -32,7 +32,7 @@ buttons.forEach(function(button){
 })
 ```
 
-## Project 2
+## PROJECT 2 
 
 ```javascript
 const form = document.querySelector('form')
@@ -58,7 +58,7 @@ form.addEventListener('submit',function(e){
 })
 ```
 
-## Project 3
+## PROJECT 3 
 
 ```javascript
 const clock = document.getElementById('clock');
@@ -70,7 +70,9 @@ setInterval(function() {
 },1000);
 
 ```
-# Project 4
+
+## PROJECT 4
+
 ```javascript
 let randomNumber = parseInt(Math.random()*100+1);
 const submit = document.querySelector('#subt');
@@ -169,3 +171,65 @@ function newgame (){
 
 ```
 
+## PROJECT 5 
+
+```javascript
+
+
+const insert = document.getElementById('insert'); // to get the reference of insert
+
+window.addEventListener('keydown', (e) => {
+  insert.innerHTML = `
+  <div class = 'color'>
+  <table>
+  <tr>
+  <th>Key</th>
+  <th>Keycode</th>
+  <th>Code</th>
+</tr>
+<tr>
+  <td>${e.key== ' ' ? 'space': e.key}</td>
+  <td>${e.keyCode}</td>
+  <td>${e.code}</td>
+</tr>
+  
+  </div>
+  `;
+});
+
+```
+
+## PROJECT 6
+
+```javascript
+ // generate a random colour//
+const randomColor = function () {
+  const hex = '0123456789ABCDEF';
+  let color = '#';
+  for (let i=0;i<6;i++) { // upto 6 because hexcode of colours have six digits and '#'
+    color += hex[Math.floor(Math.random()*16)]; // randomy chosing from hexcode
+  }
+  return color;
+};
+console.log(randomColor());
+
+// console.log(Math.floor(Math.random()*16)); // this is to choose colours in random order among the hexxcode
+let intervalid;
+const startChangingColor = function(){
+  if(!intervalid){ // helps in memory saving
+    intervalid = setInterval(changeBgColor,1000);
+  }
+
+  function changeBgColor (){
+    document.body.style.background = randomColor();
+  }
+};
+const stopChangingColor = function(){
+  clearInterval(intervalid);
+  intervalid = null;// helps in memory management 
+};
+
+document.querySelector('#start').addEventListener('click',startChangingColor);
+
+document.querySelector('#stop').addEventListener('click',stopChangingColor);
+```
